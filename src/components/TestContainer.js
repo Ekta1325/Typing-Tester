@@ -10,7 +10,8 @@ const TestContainer = ({
     timeRemaining,
     timerStarted,
     testInfo,
-    handleUserInput
+    handleUserInput,
+    startAgain
 }) => {
     return ( 
         <div className="test-container">
@@ -24,14 +25,17 @@ const TestContainer = ({
                         characters={characters} 
                         wpm={wpm}
                         testInfo={testInfo} 
-                        handleUserInput={handleUserInput}/>
+                        handleUserInput={handleUserInput}
+                        />
                 </div>
             ):(
             <div className="try-again-cont">
                 <TryAgain 
                     words={words} 
                     characters={characters} 
-                    wpm={wpm}/>
+                    wpm={wpm}
+                    startAgain={startAgain}
+                    />
             </div>
             )}
         </div>

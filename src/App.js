@@ -6,17 +6,18 @@ import Landing from './components/Landing';
 import Navbar from './components/Navbar';
 const TotalTime=60;
 const ServiceUrl="http://metaphorpsum.com/paragraphs/1/9";
-export default class App extends Component {
-  state={
-    selectedParagraph:"My name is Ekta",
+const DefaultState={
+  selectedParagraph:"",
     timerStarted:false,
     timeRemaining:TotalTime,
     words:0,
     characters:0,
     wpm:0,
     testInfo:[]
-  };
-  componentDidMount(){
+}
+export default class App extends Component {
+  state=DefaultState;
+  fetchNewParagraph=()=>{
     fetch(ServiceUrl)
         .then(response => response.text())
         .then((data)=>{
@@ -27,9 +28,12 @@ export default class App extends Component {
                     status:"notAttempted",
                 };
             });
-            this.setState({testInfo,selectedParagraph:data});
+            this.setState({...DefaultState,testInfo,selectedParagraph:data});
         });
-    
+  }
+
+  componentDidMount(){
+    this.fetchNewParagraph();
   }
 
   startTimer=()=>{
@@ -51,6 +55,8 @@ export default class App extends Component {
       }
     },1000)
   };
+
+  startAgain=()=> this.fetchNewParagraph();
 
   handleUserInput=(inputValue)=>{
     if(!this.state.timerStarted){
@@ -126,6 +132,7 @@ export default class App extends Component {
           timerStarted={this.state.timerStarted}
           testInfo={this.state.testInfo}
           handleUserInput={this.handleUserInput}
+          startAgain={this.startAgain}
         />
 
         {/* Footer */}

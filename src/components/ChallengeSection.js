@@ -8,7 +8,8 @@ const ChallengeSection = ({
     timeRemaining,
     timerStarted,
     testInfo,
-    handleUserInput
+    handleUserInput,
+    startAgain
 }) => {
 
     return ( 
@@ -22,7 +23,9 @@ const ChallengeSection = ({
                 characters={characters} 
                 wpm={wpm} 
                 testInfo={testInfo} 
-                handleUserInput={handleUserInput}/>
+                handleUserInput={handleUserInput}
+                startAgain={startAgain}
+                />
         </div>
      );
 }
